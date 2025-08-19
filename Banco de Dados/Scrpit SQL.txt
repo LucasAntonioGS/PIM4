@@ -1,0 +1,48 @@
+CREATE DATABASE SistemaChamados;
+
+USE SistemaChamados;
+
+CREATE TABLE Usuario (
+    id_usuario INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    senha VARCHAR(100) NOT NULL,
+    tipo_acesso VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Chamado (
+    id_chamado INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
+    titulo VARCHAR(200) NOT NULL,
+    descricao TEXT NULL,
+    status INT NOT NULL,
+    data_abertura DATETIME NOT NULL,
+    data_fechamento DATETIME NULL,
+    prioridade INT NOT NULL,
+    id_usuario INT NOT NULL,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario) 
+);
+
+CREATE TABLE IA_Assistente (
+    id_ia INT PRIMARY KEY,
+    resolucao TEXT,
+   data_resolucao DATETIME
+);
+
+CREATE TABLE Tecnico (
+    id_tecnico INT PRIMARY KEY,
+    nome VARCHAR(100),
+    email VARCHAR(100),
+    resolução_tec TEXT
+);
+
+CREATE TABLE Historico_Chamado (
+    id_interacao INT PRIMARY KEY,
+    mensagem TEXT,
+    data_hora DATETIME,
+    id_chamado INT NOT NULL,
+    id_ia INT,
+    id_tecnico INT,
+    FOREIGN KEY (id_chamado) REFERENCES Chamado(id_chamado),
+    FOREIGN KEY (id_ia) REFERENCES IA_Assistente(id_ia),
+    FOREIGN KEY (id_tecnico) REFERENCES Tecnico(id_tecnico)
+);

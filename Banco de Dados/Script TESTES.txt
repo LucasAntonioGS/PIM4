@@ -1,0 +1,11 @@
+DELETE FROM Historico_Chamado; DELETE FROM Chamado; DELETE FROM Usuario; DELETE FROM IA_Assistente; DELETE FROM Tecnico; 
+
+INSERT INTO Usuario (id_usuario, nome, email, senha, tipo_acesso) VALUES (1, 'Ana Souza', '*email@teste.ccom', 'senha123', 'admin'), (2, 'Carlos Lima', 'e-mail@teste.ccom', '123senha', 'usuario'), (3, 'Fernanda Costa', 'e-mail@teste.ccom', 'teste456', 'usuario'); 
+
+INSERT INTO Chamado (id_chamado, titulo, descricao, status, data_abertura, data_fechamento, prioridade, id_usuario) VALUES (1, 'Erro no login', 'Usuário não consegue acessar o sistema.', 0, '2025-05-10 08:30:00', NULL, 2, 2), (2, 'Sistema lento', 'O sistema está demorando para carregar as páginas.', 1, '2025-05-09 14:20:00', '2025-05-10 09:00:00', 1, 3); 
+
+INSERT INTO IA_Assistente (id_ia, resolucao, data_resolucao) VALUES (1, 'Reinicie o roteador e tente novamente.', '2025-05-10 08:35:00'); 
+
+INSERT INTO Tecnico (id_tecnico, nome, email, resolução_tec) VALUES (1, 'João Mendes', 'e-mai@teste.ccom', 'Foi necessário atualizar o driver de rede.'), (2, 'Marina Rocha', e-mail@teste.ccom', 'Limpeza de cache do navegador resolveu o problema.'); 
+
+INSERT INTO Historico_Chamado (id_interacao, mensagem, data_hora, id_chamado, id_ia, id_tecnico) VALUES (1, 'Usuário relatou erro ao tentar logar.', '2025-05-10 08:31:00', 1, NULL, 1), (2, 'IA sugeriu reiniciar o roteador.', '2025-05-10 08:35:00', 1, 1, NULL), (3, 'Técnico verificou lentidão e limpou o cache.', '2025-05-10 08:50:00', 2, NULL, 2); 
