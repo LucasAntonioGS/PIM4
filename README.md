@@ -25,14 +25,19 @@ Este projeto tem como objetivo o desenvolvimento de um sistema inteligente de He
 Abaixo está a divisão do planejamento das Sprints para a organização do desenvolvimento do projeto.
 
 ### Sprint 1 
+-
 
 ### Sprint 2 
+-
 
 ### Sprint 3
+-
 
 ### Sprint 4 
+-
 
 ### Sprint 5 
+-
 
 ## 📁 Requisitos
 
