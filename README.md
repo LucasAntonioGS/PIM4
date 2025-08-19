@@ -45,9 +45,31 @@ Os requisitos estão divididos entre funcionais e não funcionais. Os funcionais
 
 ## 🧠 Diagrama de Funcionamento do Sistema
 
+[Diagrama de Casos de Uso](https://github.com/LucasAntonioGS/PIM4/blob/main/Diagrama_De_Funcionamento_Do_Sistema.asta.)
+
+## Protótipo de Interface
+
+[Protótipo de Tela](https://www.figma.com/proto/PNPPrRL9X2HOf28W2uVfBA/Untitled?node-id=0-1&t=lVBYdFW5QGeTdOtv-1)
+
+## Modelo Banco de Dados
+
+[Diagrama Entidade Relacionamento]([https://github.com/LucasAntonioGS/PIM4/tree/main/Banco%20de%20Dados)
 
 
+## 🧪 Tecnologias Utilizadas
 
+- C# com ASP.NET Core MVC
+- Entity Framework Core
+- SQL Server
+- HTML / CSS
+- JavaScript
+- Git e GitHub
+- Visual Studio / VS Code
+- Figma
+
+## 📚 Documentação
+
+Você pode acompanhar toda a documentação do projeto, backlog do sistema e progresso de tarefas no repositório do grupo e no link abaixo:
 
 
 
