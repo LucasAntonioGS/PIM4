@@ -70,7 +70,7 @@ Os requisitos estão divididos entre funcionais e não funcionais. Os funcionais
 ## 📚 Documentação
 
 Você pode acompanhar toda a documentação do projeto, backlog do sistema e progresso de tarefas no repositório do grupo e no link abaixo:
-
+[Backlog](https://github.com/LucasAntonioGS/PIM4/blob/main/Backlog)
 
 
 
