@@ -53,7 +53,7 @@ Os requisitos estão divididos entre funcionais e não funcionais. Os funcionais
 
 ## Modelo Banco de Dados
 
-[Diagrama Entidade Relacionamento]([https://github.com/LucasAntonioGS/PIM4/tree/main/Banco%20de%20Dados)
+[Diagrama Entidade Relacionamento](https://github.com/LucasAntonioGS/PIM4/tree/main/Banco%20de%20Dados)
 
 
 ## 🧪 Tecnologias Utilizadas
