@@ -25,7 +25,9 @@ Este projeto tem como objetivo o desenvolvimento de um sistema inteligente de He
 Abaixo está a divisão do planejamento das Sprints para a organização do desenvolvimento do projeto.
 
 ### 📌 Sprint 1 
--
+- Alterar Diagramas de Sequência
+- Fazer Diagrama de Objetos
+- Fazer novo repositório
 
 ### 📌 Sprint 2 
 -
