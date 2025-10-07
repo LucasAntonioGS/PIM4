@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoDesk - Sistema de Chamados</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 0 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 15px;
+            cursor: pointer;
+            padding: 8px 0;
+            transition: color 0.2s;
+        }
+
+        .nav-btn:hover {
+            color: #333;
+        }
+
+        .nav-btn.active {
+            color: #333;
+            font-weight: 500;
+            border-bottom: 2px solid #5b5fff;
+        }
+
+        .btn-abrir-chamado {
+            background-color: #5b5fff;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-abrir-chamado:hover {
+            background-color: #4a4ee6;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-placeholder {
+            width: 24px;
+            height: 24px;
+            background-color: #ddd;
+            border-radius: 4px;
+        }
+
+        .notification-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background-color: #ff4444;
+            color: white;
+            font-size: 10px;
+            padding: 2px 5px;
+            border-radius: 10px;
+            min-width: 16px;
+            text-align: center;
+        }
+
+        .profile-btn .icon-placeholder {
+            border-radius: 50%;
+        }
+
+        /* Dropdown menus */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            min-width: 200px;
+            margin-top: 8px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .notification-item {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .profile-info {
+            padding: 12px 16px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .profile-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .profile-email {
+            font-size: 13px;
+            color: #666;
+        }
+
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            height: calc(100vh - 70px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 230px;
+            background-color: white;
+            border-right: 1px solid #e0e0e0;
+            padding: 30px 0;
+        }
+
+        .company-logo {
+            width: 80px;
+            height: 80px;
+            background-color: #f0f0f0;
+            margin: 0 auto 30px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 12px;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-item {
+            padding: 12px 30px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #666;
+            transition: background-color 0.2s;
+        }
+
+        .sidebar-item:hover {
+            background-color: #f8f8f8;
+        }
+
+        .sidebar-item.active {
+            background-color: #f0f0ff;
+            color: #5b5fff;
+            border-right: 3px solid #5b5fff;
+        }
+
+        .menu-icon {
+            width: 20px;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 3px;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .content-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 8px 16px;
+            width: 300px;
+        }
+
+        .search-box input {
+            border: none;
+            outline: none;
+            flex: 1;
+            font-size: 14px;
+        }
+
+        .search-icon {
+            width: 18px;
+            height: 18px;
+            background-color: #ddd;
+            border-radius: 3px;
+            margin-left: 8px;
+        }
+
+        /* Table */
+        .table-container {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #fafafa;
+        }
+
+        th {
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+            color: #666;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr:hover {
+            background-color: #fafafa;
+        }
+
+        tbody tr {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        tbody tr:hover {
+            background-color: #f8f8ff;
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .status-pendente {
+            background-color: #ffe0e0;
+            color: #cc0000;
+        }
+
+        .status-solucionado {
+            background-color: #d4f4dd;
+            color: #0d7d2d;
+        }
+
+        .status-andamento {
+            background-color: #e0f0ff;
+            color: #0066cc;
+        }
+
+        .prioridade-alta {
+            color: #cc0000;
+            font-weight: 600;
+        }
+
+        .prioridade-media {
+            color: #ff9900;
+            font-weight: 600;
+        }
+
+        .prioridade-baixa {
+            color: #00aa00;
+            font-weight: 600;
+        }
+
+        .atribuicao {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .avatar-icon {
+            width: 18px;
+            height: 18px;
+            background-color: #ddd;
+            border-radius: 50%;
+        }
+
+        /* Offline indicator */
+        .offline-banner {
+            display: none;
+            background-color: #ff4444;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .offline-banner.show {
+            display: block;
+        }
+
+        /* Dashboard Styles */
+        .dashboard-section {
+            display: none;
+        }
+
+        .dashboard-section.active {
+            display: block;
+        }
+
+        .filter-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .date-input {
+            padding: 10px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: #f5f5f5;
+            width: 160px;
+            cursor: pointer;
+        }
+
+        .date-input:focus {
+            outline: none;
+            border-color: #5b5fff;
+        }
+
+        .btn-search-filter {
+            background-color: #87ceeb;
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-search-filter:hover {
+            background-color: #6bb8d6;
+        }
+
+        .btn-download {
+            background-color: #999;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .btn-download:hover {
+            background-color: #777;
+        }
+
+        .download-icon {
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 3px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .indicator-card {
+            background: #999;
+            padding: 24px;
+            border-radius: 8px;
+            min-height: 140px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            height: 200px;
+            padding: 20px;
+        }
+
+        .bar {
+            background-color: #999;
+            border-radius: 4px 4px 0 0;
+            min-width: 40px;
+        }
+
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            background-color: #999;
+            border-radius: 50%;
+        }
+
+        .section-content {
+            display: none;
+        }
+
+        .section-content.active {
+            display: block;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            padding: 24px 30px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .btn-close-modal {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-close-modal:hover {
+            background-color: #f0f0f0;
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #5b5fff;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            background-color: white;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #5b5fff;
+        }
+
+        .form-textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 12px 16px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #5b5fff;
+        }
+
+        .file-upload-area {
+            margin-top: 12px;
+            padding: 24px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .file-upload-area:hover {
+            border-color: #5b5fff;
+            background-color: #f8f8ff;
+        }
+
+        .file-upload-text {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .uploaded-files {
+            margin-top: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .file-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            background-color: #f0f0f0;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .file-tag button {
+            background: none;
+            border: none;
+            color: #666;
+            cursor: pointer;
+            padding: 0;
+            font-size: 16px;
+        }
+
+        .modal-footer {
+            padding: 20px 30px;
+            border-top: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
+        .btn-cancel {
+            padding: 10px 24px;
+            border: 1px solid #e0e0e0;
+            background: white;
+            color: #666;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-cancel:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-submit {
+            padding: 10px 24px;
+            border: none;
+            background: #5b5fff;
+            color: white;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-submit:hover {
+            background-color: #4a4ee6;
+        }
+
+        /* Ticket Detail View */
+        .ticket-detail-view {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 230px;
+            right: 0;
+            bottom: 0;
+            background: #f5f5f5;
+            z-index: 1500;
+            overflow-y: auto;
+        }
+
+        .ticket-detail-view.show {
+            display: block;
+        }
+
+        .ticket-header-actions {
+            background: white;
+            padding: 20px 30px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn-action {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .btn-responder {
+            background-color: #5b5fff;
+            color: white;
+        }
+
+        .btn-responder:hover {
+            background-color: #4a4ee6;
+        }
+
+        .btn-editar {
+            background-color: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-editar:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-encerrar {
+            background-color: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-encerrar:hover {
+            background-color: #f5f5f5;
+        }
+
+        .btn-encaminhar {
+            background-color: white;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        .btn-encaminhar:hover {
+            background-color: #f5f5f5;
+        }
+
+        .ticket-content {
+            padding: 30px;
+            max-width: 1200px;
+        }
+
+        .ticket-id {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .ticket-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .ticket-description {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            line-height: 1.6;
+            color: #333;
+            white-space: pre-wrap;
+        }
+
+        .ticket-images {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .ticket-image {
+            width: 150px;
+            height: 150px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .ticket-attribution {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* Encaminhar Modal */
+        .encaminhar-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 3000;
+            min-width: 400px;
+            display: none;
+        }
+
+        .encaminhar-modal.show {
+            display: block;
+        }
+
+        .encaminhar-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .analista-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+
+        .analista-item {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .analista-item:hover {
+            background-color: #f8f8ff;
+            border-color: #5b5fff;
+        }
+
+        .analista-item.selected {
+            background-color: #e8e8ff;
+            border-color: #5b5fff;
+        }
+
+        .analista-avatar {
+            width: 36px;
+            height: 36px;
+            background-color: #ddd;
+            border-radius: 50%;
+        }
+
+        .analista-info {
+            flex: 1;
+        }
+
+        .analista-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .analista-email {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .encaminhar-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+    </style>
+</head>
+<body>
+    <!-- Offline Banner -->
+    <div class="offline-banner" id="offlineBanner">
+        Você está sem conexão com a internet
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo">NeoDesk</div>
+            <nav class="nav-buttons">
+                <button class="nav-btn active" onclick="changeSection('meus-chamados')">Meus chamados</button>
+                <button class="nav-btn" onclick="changeSection('dashboard')">Dashboard</button>
+                <button class="nav-btn" onclick="changeSection('agenda')">Agenda</button>
+                <button class="btn-abrir-chamado" onclick="changeSection('abrir-chamado')">Abrir Chamado</button>
+            </nav>
+        </div>
+        <div class="header-right">
+            <!-- Notificações -->
+            <div class="dropdown">
+                <button class="icon-btn" onclick="toggleDropdown('notifications')">
+                    <div class="icon-placeholder"></div>
+                    <span class="notification-badge">2</span>
+                </button>
+                <div class="dropdown-menu" id="notificationsMenu">
+                    <div class="dropdown-item notification-item">
+                        <strong>Novo chamado atribuído</strong><br>
+                        <small>Chamado #000005 - há 5 minutos</small>
+                    </div>
+                    <div class="dropdown-item notification-item">
+                        <strong>Chamado atualizado</strong><br>
+                        <small>Chamado #000002 - há 1 hora</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WiFi Status -->
+            <button class="icon-btn" id="wifiBtn">
+                <div class="icon-placeholder"></div>
+            </button>
+
+            <!-- Configurações -->
+            <div class="dropdown">
+                <button class="icon-btn" onclick="toggleDropdown('settings')">
+                    <div class="icon-placeholder"></div>
+                </button>
+                <div class="dropdown-menu" id="settingsMenu">
+                    <div class="dropdown-item" onclick="alert('Trocar senha')">Trocar senha</div>
+                    <div class="dropdown-item" onclick="alert('Sair')">Sair</div>
+                </div>
+            </div>
+
+            <!-- Perfil -->
+            <div class="dropdown">
+                <button class="icon-btn profile-btn" onclick="toggleDropdown('profile')">
+                    <div class="icon-placeholder"></div>
+                </button>
+                <div class="dropdown-menu" id="profileMenu">
+                    <div class="profile-info">
+                        <div class="profile-name">Nome do Usuário</div>
+                        <div class="profile-email">usuario@empresa.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="company-logo">Logo</div>
+            <ul class="sidebar-menu">
+                <li class="sidebar-item active">
+                    <div class="menu-icon"></div>
+                    <span>Fila de espera</span>
+                </li>
+                <li class="sidebar-item">
+                    <div class="menu-icon"></div>
+                    <span>Botão</span>
+                </li>
+                <li class="sidebar-item">
+                    <div class="menu-icon"></div>
+                    <span>Botão</span>
+                </li>
+                <li class="sidebar-item">
+                    <div class="menu-icon"></div>
+                    <span>Botão</span>
+                </li>
+                <li class="sidebar-item">
+                    <div class="menu-icon"></div>
+                    <span>Botão</span>
+                </li>
+                <li class="sidebar-item">
+                    <div class="menu-icon"></div>
+                    <span>Botão</span>
+                </li>
+                <li class="sidebar-item">
+                    <div class="menu-icon"></div>
+                    <span>Botão</span>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Fila de Espera Section -->
+            <div class="section-content active" id="meus-chamados-content">
+                <div class="content-header">
+                    <h1 class="content-title">Fila de espera</h1>
+                    <div class="search-box">
+                        <input type="text" placeholder="Pesquisar">
+                        <div class="search-icon"></div>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" class="checkbox"></th>
+                                <th>Tipo de chamado</th>
+                                <th>ID</th>
+                                <th>Resumo</th>
+                                <th>Solicitante</th>
+                                <th>Atribuição</th>
+                                <th>Status</th>
+                                <th>Criado em</th>
+                                <th>prazo</th>
+                                <th>Prioridade</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr onclick="openTicketDetail(1, 'Banco de dados corrompido', 'Descrição detalhada do problema com o banco de dados...', 'Ator X')">
+                                <td><input type="checkbox" class="checkbox" onclick="event.stopPropagation()"></td>
+                                <td>Tipo de chamado</td>
+                                <td>0000001</td>
+                                <td>Banco de dados corrompido</td>
+                                <td>Ator X</td>
+                                <td>
+                                    <div class="atribuicao">
+                                        <div class="avatar-icon"></div>
+                                        Miguel
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-pendente">Pendente</span></td>
+                                <td>16/07/2025</td>
+                                <td>24h</td>
+                                <td class="prioridade-alta">Alta</td>
+                            </tr>
+                            <tr onclick="openTicketDetail(2, 'Empresa pegando fogo', 'Situação crítica que requer atenção imediata...', 'Ator Y')">
+                                <td><input type="checkbox" class="checkbox" onclick="event.stopPropagation()"></td>
+                                <td>Tipo de chamado</td>
+                                <td>0000002</td>
+                                <td>Empresa pegando fogo</td>
+                                <td>Ator Y</td>
+                                <td>
+                                    <div class="atribuicao">
+                                        <div class="avatar-icon"></div>
+                                        Miguel
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-pendente">Pendente</span></td>
+                                <td>14/07/2025</td>
+                                <td>96h</td>
+                                <td class="prioridade-media">Média</td>
+                            </tr>
+                            <tr onclick="openTicketDetail(3, 'Roteador com problemas', 'O roteador está apresentando instabilidade na conexão...', 'Ator Z')">
+                                <td><input type="checkbox" class="checkbox" onclick="event.stopPropagation()"></td>
+                                <td>Tipo de chamado</td>
+                                <td>0000003</td>
+                                <td>Roteador com problemas</td>
+                                <td>Ator Z</td>
+                                <td>
+                                    <div class="atribuicao">
+                                        <div class="avatar-icon"></div>
+                                        Miguel
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-solucionado">Solucionado</span></td>
+                                <td>15/07/2025</td>
+                                <td>4h</td>
+                                <td class="prioridade-media">Média</td>
+                            </tr>
+                            <tr onclick="openTicketDetail(4, 'Rede desconectada', 'A rede está completamente fora do ar...', 'Ator W')">
+                                <td><input type="checkbox" class="checkbox" onclick="event.stopPropagation()"></td>
+                                <td>Tipo de chamado</td>
+                                <td>0000004</td>
+                                <td>Rede desconectada</td>
+                                <td>Ator W</td>
+                                <td>
+                                    <div class="atribuicao">
+                                        <div class="avatar-icon"></div>
+                                        Miguel
+                                    </div>
+                                </td>
+                                <td><span class="status-badge status-andamento">Em andamento</span></td>
+                                <td>16/07/2025</td>
+                                <td>8h</td>
+                                <td class="prioridade-baixa">Baixa</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Dashboard Section -->
+            <div class="section-content" id="dashboard-content">
+                <div class="content-header">
+                    <h1 class="content-title">Dashboard</h1>
+                </div>
+
+                <!-- Filter Section -->
+                <div class="filter-container">
+                    <input type="date" class="date-input" value="2025-02-28">
+                    <input type="date" class="date-input" value="2025-05-14">
+                    <button class="btn-search-filter">
+                        <div class="search-icon"></div>
+                    </button>
+                    <button class="btn-download">
+                        <div class="download-icon"></div>
+                        Baixar
+                    </button>
+                </div>
+
+                <!-- Indicator Cards -->
+                <div class="cards-grid">
+                    <div class="indicator-card"></div>
+                    <div class="indicator-card"></div>
+                    <div class="indicator-card"></div>
+                    <div class="indicator-card"></div>
+                    <div class="indicator-card"></div>
+                    <div class="indicator-card"></div>
+                </div>
+
+                <!-- Charts -->
+                <div class="charts-container">
+                    <div class="chart-card">
+                        <div class="bar-chart">
+                            <div class="bar" style="height: 60%;"></div>
+                            <div class="bar" style="height: 80%;"></div>
+                            <div class="bar" style="height: 100%;"></div>
+                            <div class="bar" style="height: 70%;"></div>
+                            <div class="bar" style="height: 50%;"></div>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="pie-chart"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agenda Section -->
+            <div class="section-content" id="agenda-content">
+                <div class="content-header">
+                    <h1 class="content-title">Agenda</h1>
+                </div>
+                <div style="background: white; padding: 40px; border-radius: 8px; text-align: center; color: #999;">
+                    Conteúdo da Agenda será exibido aqui
+                </div>
+            </div>
+
+            <!-- Abrir Chamado Section -->
+            <div class="section-content" id="abrir-chamado-content">
+                <div class="content-header">
+                    <h1 class="content-title">Abrir Chamado</h1>
+                </div>
+                <div style="background: white; padding: 40px; border-radius: 8px; text-align: center; color: #999;">
+                    Formulário de abertura de chamado será exibido aqui
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Abrir Chamado -->
+    <div class="modal-overlay" id="modalAbrirChamado">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Formulário de chamado</h2>
+                <button class="btn-close-modal" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="formChamado">
+                    <div class="form-group">
+                        <label class="form-label">Problema Apresentado:</label>
+                        <input type="text" class="form-input" placeholder="Digite o assunto do problema">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Categoria:</label>
+                        <select class="form-select">
+                            <option value="">Selecionar</option>
+                            <option value="hardware">Hardware</option>
+                            <option value="software">Software</option>
+                            <option value="rede">Rede</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Isso afeta:</label>
+                        <select class="form-select">
+                            <option value="">Selecionar</option>
+                            <option value="mim">A mim</option>
+                            <option value="setor">O setor</option>
+                            <option value="empresa">A empresa</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Detalhes do problema:</label>
+                        <textarea class="form-textarea" placeholder="Descreva o problema em detalhes..."></textarea>
+                        
+                        <div class="file-upload-area" onclick="document.getElementById('fileInput').click()">
+                            <div class="file-upload-text">
+                                📎 Clique para anexar imagens ou arquivos
+                            </div>
+                        </div>
+                        <input type="file" id="fileInput" class="file-input" multiple accept="image/*" onchange="handleFileUpload(event)">
+                        
+                        <div class="uploaded-files" id="uploadedFiles"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+                <button class="btn-submit" onclick="submitChamado()">Enviar Chamado</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Responder/Encerrar -->
+    <div class="modal-overlay" id="modalResposta">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="respostaModalTitle">Responder Chamado</h2>
+                <button class="btn-close-modal" onclick="closeRespostaModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="formResposta">
+                    <div class="form-group">
+                        <label class="form-label">Título:</label>
+                        <input type="text" class="form-input" placeholder="Digite o título da resposta">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Descrição:</label>
+                        <textarea class="form-textarea" placeholder="Descreva a resposta..."></textarea>
+                        
+                        <div class="file-upload-area" onclick="document.getElementById('fileInputResposta').click()">
+                            <div class="file-upload-text">
+                                📎 Clique para anexar imagens ou arquivos
+                            </div>
+                        </div>
+                        <input type="file" id="fileInputResposta" class="file-input" multiple accept="image/*" onchange="handleFileUploadResposta(event)">
+                        
+                        <div class="uploaded-files" id="uploadedFilesResposta"></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-cancel" onclick="closeRespostaModal()">Cancelar</button>
+                <button class="btn-submit" onclick="submitResposta()">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ticket Detail View -->
+    <div class="ticket-detail-view" id="ticketDetailView">
+        <div class="ticket-header-actions">
+            <button class="btn-action btn-responder" onclick="openRespostaModal('responder')">Responder</button>
+            <button class="btn-action btn-editar" onclick="openEditModal()">Editar</button>
+            <button class="btn-action btn-encerrar" onclick="openRespostaModal('encerrar')">Encerrar</button>
+            <button class="btn-action btn-encaminhar" onclick="openEncaminharModal()">Encaminhar</button>
+            <button class="btn-action btn-editar" onclick="closeTicketDetail()" style="margin-left: auto;">✕ Fechar</button>
+        </div>
+        <div class="ticket-content">
+            <div class="ticket-id">ID: #000342</div>
+            <div class="ticket-title">Estou com problema em criar um sistema em 3 plataformas com banco na nuvem antes de dezembro chegar</div>
+            <div class="ticket-description">
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+            </div>
+            <div class="ticket-attribution">att, miguel</div>
+        </div>
+    </div>
+
+    <!-- Modal Encaminhar -->
+    <div class="modal-overlay" id="modalEncaminharOverlay" onclick="closeEncaminharModal()">
+        <div class="encaminhar-modal" id="modalEncaminhar" onclick="event.stopPropagation()">
+            <h3 class="encaminhar-title">Encaminhar para Analista</h3>
+            <div class="analista-list">
+                <div class="analista-item" onclick="selectAnalista(this, 1)">
+                    <div class="analista-avatar"></div>
+                    <div class="analista-info">
+                        <div class="analista-name">João Silva</div>
+                        <div class="analista-email">joao.silva@empresa.com</div>
+                    </div>
+                </div>
+                <div class="analista-item" onclick="selectAnalista(this, 2)">
+                    <div class="analista-avatar"></div>
+                    <div class="analista-info">
+                        <div class="analista-name">Maria Santos</div>
+                        <div class="analista-email">maria.santos@empresa.com</div>
+                    </div>
+                </div>
+                <div class="analista-item" onclick="selectAnalista(this, 3)">
+                    <div class="analista-avatar"></div>
+                    <div class="analista-info">
+                        <div class="analista-name">Pedro Oliveira</div>
+                        <div class="analista-email">pedro.oliveira@empresa.com</div>
+                    </div>
+                </div>
+                <div class="analista-item" onclick="selectAnalista(this, 4)">
+                    <div class="analista-avatar"></div>
+                    <div class="analista-info">
+                        <div class="analista-name">Ana Costa</div>
+                        <div class="analista-email">ana.costa@empresa.com</div>
+                    </div>
+                </div>
+            </div>
+            <div class="encaminhar-actions">
+                <button class="btn-cancel" onclick="closeEncaminharModal()">Cancelar</button>
+                <button class="btn-submit" onclick="confirmEncaminhar()">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle dropdown menus
+        function toggleDropdown(menuId) {
+            const menu = document.getElementById(menuId + 'Menu');
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-menu').forEach(m => {
+                if (m !== menu) m.classList.remove('show');
+            });
+            menu.classList.toggle('show');
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown-menu').forEach(m => {
+                    m.classList.remove('show');
+                });
+            }
+        });
+
+        // Change section (navigation)
+        function changeSection(section) {
+            // Update active nav button
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Se for "Abrir Chamado", abre o modal
+            if (section === 'abrir-chamado') {
+                openModal();
+                return;
+            }
+            
+            // Hide all sections
+            document.querySelectorAll('.section-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Show selected section
+            const sectionContent = document.getElementById(section + '-content');
+            if (sectionContent) {
+                sectionContent.classList.add('active');
+            }
+            
+            console.log('Navegando para:', section);
+        }
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('modalAbrirChamado').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('modalAbrirChamado').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            // Reset form
+            document.getElementById('formChamado').reset();
+            document.getElementById('uploadedFiles').innerHTML = '';
+        }
+
+        // File upload handling
+        let uploadedFiles = [];
+
+        function handleFileUpload(event) {
+            const files = Array.from(event.target.files);
+            uploadedFiles = [...uploadedFiles, ...files];
+            displayUploadedFiles();
+        }
+
+        function displayUploadedFiles() {
+            const container = document.getElementById('uploadedFiles');
+            container.innerHTML = '';
+            
+            uploadedFiles.forEach((file, index) => {
+                const fileTag = document.createElement('div');
+                fileTag.className = 'file-tag';
+                fileTag.innerHTML = `
+                    ${file.name}
+                    <button type="button" onclick="removeFile(${index})">×</button>
+                `;
+                container.appendChild(fileTag);
+            });
+        }
+
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            displayUploadedFiles();
+        }
+
+        function submitChamado() {
+            // Aqui você fará a integração com a API
+            alert('Chamado enviado com sucesso!');
+            closeModal();
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('modalAbrirChamado');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Ticket Detail Functions
+        function openTicketDetail(id, title, description, author) {
+            // Atualiza o conteúdo com os dados do chamado clicado
+            document.querySelector('.ticket-id').textContent = `ID: #${String(id).padStart(6, '0')}`;
+            document.querySelector('.ticket-title').textContent = title;
+            document.querySelector('.ticket-description').textContent = description;
+            document.querySelector('.ticket-attribution').textContent = `att, ${author.toLowerCase()}`;
+            
+            // Mostra a tela de detalhes
+            document.getElementById('ticketDetailView').classList.add('show');
+        }
+
+        function closeTicketDetail() {
+            document.getElementById('ticketDetailView').classList.remove('show');
+        }
+
+        // Resposta/Encerrar Modal
+        let uploadedFilesResposta = [];
+
+        function openRespostaModal(tipo) {
+            const modal = document.getElementById('modalResposta');
+            const title = document.getElementById('respostaModalTitle');
+            
+            if (tipo === 'encerrar') {
+                title.textContent = 'Encerrar Chamado';
+            } else {
+                title.textContent = 'Responder Chamado';
+            }
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeRespostaModal() {
+            document.getElementById('modalResposta').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            document.getElementById('formResposta').reset();
+            document.getElementById('uploadedFilesResposta').innerHTML = '';
+            uploadedFilesResposta = [];
+        }
+
+        function handleFileUploadResposta(event) {
+            const files = Array.from(event.target.files);
+            uploadedFilesResposta = [...uploadedFilesResposta, ...files];
+            displayUploadedFilesResposta();
+        }
+
+        function displayUploadedFilesResposta() {
+            const container = document.getElementById('uploadedFilesResposta');
+            container.innerHTML = '';
+            
+            uploadedFilesResposta.forEach((file, index) => {
+                const fileTag = document.createElement('div');
+                fileTag.className = 'file-tag';
+                fileTag.innerHTML = `
+                    ${file.name}
+                    <button type="button" onclick="removeFileResposta(${index})">×</button>
+                `;
+                container.appendChild(fileTag);
+            });
+        }
+
+        function removeFileResposta(index) {
+            uploadedFilesResposta.splice(index, 1);
+            displayUploadedFilesResposta();
+        }
+
+        function submitResposta() {
+            // Aqui você fará a integração com a API
+            alert('Resposta enviada com sucesso!');
+            closeRespostaModal();
+        }
+
+        // Editar Chamado
+        function openEditModal() {
+            // Abre o modal de criar chamado mas com os dados preenchidos
+            document.getElementById('modalAbrirChamado').classList.add('show');
+            document.body.style.overflow = 'hidden';
+            // Aqui você preencheria os campos com os dados do chamado atual
+        }
+
+        // Encaminhar Modal
+        let selectedAnalistaId = null;
+
+        function openEncaminharModal() {
+            document.getElementById('modalEncaminharOverlay').classList.add('show');
+            document.getElementById('modalEncaminhar').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeEncaminharModal() {
+            document.getElementById('modalEncaminharOverlay').classList.remove('show');
+            document.getElementById('modalEncaminhar').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            // Remove selection
+            document.querySelectorAll('.analista-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            selectedAnalistaId = null;
+        }
+
+        function selectAnalista(element, id) {
+            // Remove previous selection
+            document.querySelectorAll('.analista-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            // Add new selection
+            element.classList.add('selected');
+            selectedAnalistaId = id;
+        }
+
+        function confirmEncaminhar() {
+            if (!selectedAnalistaId) {
+                alert('Por favor, selecione um analista');
+                return;
+            }
+            // Aqui você fará a integração com a API
+            alert('Chamado encaminhado com sucesso!');
+            closeEncaminharModal();
+        }
+
+        // Simulate online/offline status
+        window.addEventListener('online', function() {
+            document.getElementById('offlineBanner').classList.remove('show');
+        });
+
+        window.addEventListener('offline', function() {
+            document.getElementById('offlineBanner').classList.add('show');
+        });
+    </script>
+</body>
+</html>
