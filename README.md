@@ -8,8 +8,7 @@
 </p>
 
 <p align="center">
-  | <a href ="#desafio"> Desafio</a>  |
-  <a href ="#solucao"> Solução</a>  |   
+  | <a href ="#desafio"> Desafio</a>  |  
   <a href ="#backlog"> Backlog do Produto</a>  |
   <a href ="#dor">DoR</a>  |
   <a href ="#dod">DoD</a>  |
