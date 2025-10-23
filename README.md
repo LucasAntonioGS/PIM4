@@ -1,10 +1,10 @@
-# API 4º Semestre ADS  
+# PIM 4º Semestre ADS  
 
 # Sistema Integrado para a Gestão de Chamados e Suporte Técnico baseado em IA - PIM
 
 <p align="center">
       <img src="docs/Img/logo.png" alt="logo do projeto" width="200">
-      <h2 align="center"> PIM3 </h2>
+      <h2 align="center"> NeoDesk </h2>
 </p>
 
 <p align="center">
@@ -36,22 +36,25 @@ O desafio consiste em desenvolver um sistema integrado para gestão de chamados 
 
 [Diagrama de Funcionamento do Sistema](https://github.com/LucasAntonioGS/NeoDesk/blob/main/Diagrama_De_Funcionamento_Do_Sistema%20Atualizado%202.2.asta) 📄
 
----
+--
 ## 📋 Backlog do Produto <a id="backlog"></a>
 
-| Rank | Prioridade | User Story / História de Usuário                                                                                   | Story Points* | Sprint | Requisito do Cliente | Status |
-| :--: | :--------: | ------------------------------------------------------------------------------------------------------------------ | :-----------: | :----: | :------------------: | :----: |
-|  1   |    Alta    | Como **Administrador**, quero **cadastrar usuários**, para que novos colaboradores possam acessar o sistema        |       –       |   1    |        RF01          |   ✅   |
-|  2   |    Alta    | Como **Administrador**, quero **alterar a senha de um usuário**, para ajudá-lo em caso de esquecimento             |       –       |   1    |        RF02          |   ✅   |
-|  3   |    Alta    | Como **Usuário**, quero **abrir um chamado**, para solicitar suporte técnico                                       |       –       |   1    |        RF03          |   ✅   |
-|  4   |    Alta    | Como **Técnico**, quero **responder a um chamado**, para registrar o atendimento e a solução aplicada              |       –       |   2    |        RF04          |   ✅   |
-|  5   |    Alta    | Como **Usuário**, quero **fechar um chamado**, para encerrar solicitações resolvidas                               |       –       |   2    |        RF05          |   ✅   |
-|  6   |   Média    | Como **Administrador**, quero **exportar dados de chamados**, para relatórios e análises de desempenho             |       –       |   3    |        RF06          |   ✅   |
-|  7   |   Média    | Como **Usuário**, quero **editar minhas informações pessoais**, para manter meus dados sempre atualizados          |       –       |   3    |        RF07          |   ✅   |
-|  8   |   Baixa    | Como **Usuário**, quero **consultar o histórico de chamados**, para acompanhar solicitações anteriores             |       –       |   3    |        RF08          |   ✅   |
-|  9   |   Baixa    | Como **Administrador**, quero **remover usuários do sistema**, para revogar acessos de ex-colaboradores            |       –       |   3    |        RF09          |   ✅   |
-|  10  |   Alta     | Desenvolver uma interface, que seja amigavel e "minimalista", para que não seja dificil a utilização.              |       –       |   4    |        RF10          |    X    |
-|  11  |   Média    | Desenvolver uma interface de site que seja compativel para ser utilizada no celular                                |       –       |   4    |        RF11          |    X    |
+| 🏅 Rank | ⚙️ Prioridade | 🧠 User Story | 🎯 Story Points | 🏁 Sprint | 📋 Requisito | 🧩 Status |
+|:-------:|:--------------:|:--------------|:---------------:|:----------:|:-------------:|:-----------:|
+| 1 | 🔴 Alta | Login com autenticação segura | 8 | 1 | R09 | ✅ Concluído |
+| 2 | 🔴 Alta | Abrir chamado via assistente virtual | 13 | 2 | R01 | 🏗️ Em desenvolvimento |
+| 3 | 🔴 Alta | Visualizar e priorizar chamados automaticamente | 21 | 2 | R02 | 🏗️ Em desenvolvimento |
+| 4 | 🔴 Alta | IA tenta resolver antes do atendimento humano | 34 | 2 | R01 | 🏗️ Em desenvolvimento |
+| 5 | 🟠 Média | Painel com métricas e gráficos | 20 | 4 | R04 | ⏳ Aguardando início |
+| 6 | 🟠 Média | Notificações sobre status de chamados | 13 | 3 | R03 | ⏳ Aguardando início |
+| 7 | 🟠 Média | Consulta à base de conhecimento | 16 | 3 | R03 | ⏳ Aguardando início |
+| 8 | 🟢 Baixa | Exportar relatórios em PDF | 8 | 4 | R04 | ⏳ Aguardando início |
+| 9 | 🟢 Baixa | Auditoria de ações (LGPD) | 12 | 4 | R09 | ⏳ Aguardando início |
+
+### 🧾 Legenda:
+✅ **Concluído**  
+🏗️ **Em desenvolvimento**  
+⏳ **Aguardando início**
 
 
 ---
