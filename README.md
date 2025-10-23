@@ -81,13 +81,12 @@ O desafio consiste em desenvolver um sistema integrado para gestão de chamados 
 
 ## 📅 Cronograma de Sprints <a id="sprint"></a>
 
-| Sprint          |    Período    | Documentação |
-| --------------- | :-----------: | -------------|
-| 🔖 **SPRINT 1** | 20/08 - 01/09 |  |
-| 🔖 **SPRINT 2** | 02/09 - 08/09 |  |
-| 🔖 **SPRINT 3** | 09/mm - 23/09 |  |
-
-
+| 🏁 Sprint | 📆 Período | 🎯 Objetivo Principal |
+|:----------:|:-----------:|:---------------------|
+| Sprint 1 | 01/08 – 21/08 | Implementação do login e estrutura base |
+| Sprint 2 | 22/08 – 12/09 | Assistente virtual e módulo de tickets |
+| Sprint 3 | 13/09 – 02/10 | Base de conhecimento e notificações |
+| Sprint 4 | 03/10 – 23/10 | Dashboard e auditoria de logs |
 
 ---
 
