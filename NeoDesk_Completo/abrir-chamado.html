@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoDesk - Abrir Chamado</title>
+    <link rel="stylesheet" href="styles-vertical.css">
+    <link rel="stylesheet" href="styles-horizontal.css" media="(min-width: 768px)">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-left">
+            <h1 class="logo">NeoDesk</h1>
+            <nav class="main-nav">
+                <button class="nav-btn" data-page="meus-chamados" onclick="window.location.href='fila-espera.html'">Meus chamados</button>
+                <button class="nav-btn" data-page="dashboard" onclick="window.location.href='dashboard.html'">Dashboard</button>
+                <button class="nav-btn" data-page="agenda">Agenda</button>
+                <button class="nav-btn btn-primary active" data-page="abrir-chamado">Abrir Chamado</button>
+            </nav>
+        </div>
+        
+        <div class="header-right">
+            <!-- Notificações -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="notificationsBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notification-badge">2</span>
+                </button>
+                <div class="dropdown-menu" id="notificationsMenu">
+                    <div class="dropdown-header">Notificações</div>
+                    <div class="notification-item">
+                        <p><strong>Novo chamado atribuído</strong></p>
+                        <p class="notification-text">Chamado #0000001 - Banco de dados corrompido</p>
+                        <span class="notification-time">Há 5 minutos</span>
+                    </div>
+                    <div class="notification-item">
+                        <p><strong>Chamado atualizado</strong></p>
+                        <p class="notification-text">Chamado #0000002 - Empresa pegando fogo</p>
+                        <span class="notification-time">Há 1 hora</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status de Conexão -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="connectionStatus">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="wifiIcon">
+                        <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                        <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                        <line x1="12" y1="20" x2="12.01" y2="20"/>
+                    </svg>
+                </button>
+                <div class="offline-message" id="offlineMessage">
+                    Você está sem internet
+                </div>
+            </div>
+
+            <!-- Configurações -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="settingsBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v6m0 6v6m5.2-13.8l-4.2 4.2m-2 2l-4.2 4.2M23 12h-6m-6 0H1m17.8 5.2l-4.2-4.2m-2-2l-4.2-4.2"/>
+                    </svg>
+                </button>
+                <div class="dropdown-menu" id="settingsMenu">
+                    <button class="dropdown-item" onclick="changePassword()">Trocar de senha</button>
+                    <button class="dropdown-item" onclick="logout()">Sair</button>
+                </div>
+            </div>
+
+            <!-- Perfil -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="profileBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </button>
+                <div class="dropdown-menu dropdown-profile" id="profileMenu">
+                    <div class="profile-info">
+                        <p class="profile-name" id="userName">Nome do Usuário</p>
+                        <p class="profile-email" id="userEmail">usuario@email.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="company-logo">
+                <img src="" alt="Logo da Empresa" id="companyLogo">
+            </div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-item" onclick="window.location.href='fila-espera.html'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M9 3v18"/>
+                    </svg>
+                    <span>Fila de espera</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Modal/Formulário de Chamado -->
+            <div class="ticket-form-container">
+                <div class="ticket-form-header">
+                    <h2>Formulário de chamado</h2>
+                    <button class="btn-close-form" onclick="closeTicketForm()">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <form id="ticketForm" class="ticket-form" onsubmit="submitTicket(event)">
+                    <!-- Problema Apresentado -->
+                    <div class="form-group">
+                        <label for="problemTitle" class="form-label">Problema Apresentado:</label>
+                        <input 
+                            type="text" 
+                            id="problemTitle" 
+                            name="problemTitle" 
+                            class="form-input" 
+                            placeholder="Digite um breve resumo do problema"
+                            required
+                        >
+                    </div>
+
+                    <!-- Categoria -->
+                    <div class="form-group">
+                        <label for="category" class="form-label">Categoria:</label>
+                        <div class="custom-select">
+                            <select id="category" name="category" class="form-select" required>
+                                <option value="" disabled selected>Selecionar</option>
+                                <option value="hardware">Hardware</option>
+                                <option value="software">Software</option>
+                                <option value="rede">Rede</option>
+                            </select>
+                            <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Isso afeta -->
+                    <div class="form-group">
+                        <label for="affects" class="form-label">Isso afeta:</label>
+                        <div class="custom-select">
+                            <select id="affects" name="affects" class="form-select" required>
+                                <option value="" disabled selected>Selecionar</option>
+                                <option value="a-mim">A mim</option>
+                                <option value="o-setor">O setor</option>
+                                <option value="a-empresa">A empresa</option>
+                            </select>
+                            <svg class="select-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Detalhes do Problema -->
+                    <div class="form-group">
+                        <label for="problemDetails" class="form-label">Detalhes do problema:</label>
+                        <textarea 
+                            id="problemDetails" 
+                            name="problemDetails" 
+                            class="form-textarea" 
+                            rows="10"
+                            placeholder="Descreva o problema com o máximo de detalhes possível..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- Botões de Ação -->
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" onclick="closeTicketForm()">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn-submit">
+                            Enviar Chamado
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <script src="neodesk.js"></script>
+    <script src="abrir-chamado.js"></script>
+</body>
+</html>

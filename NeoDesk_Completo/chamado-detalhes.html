@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoDesk - Detalhes do Chamado</title>
+    <link rel="stylesheet" href="styles-vertical.css">
+    <link rel="stylesheet" href="styles-horizontal.css" media="(min-width: 768px)">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-left">
+            <h1 class="logo">NeoDesk</h1>
+            <button class="nav-btn" onclick="window.location.href='fila-espera.html'" style="margin-left: 1rem;">
+                ← Voltar
+            </button>
+            
+        </div>
+        
+        <div class="header-right">
+            <!-- Notificações -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="notificationsBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notification-badge">2</span>
+                </button>
+                <div class="dropdown-menu" id="notificationsMenu">
+                    <div class="dropdown-header">Notificações</div>
+                    <div class="notification-item">
+                        <p><strong>Novo chamado atribuído</strong></p>
+                        <p class="notification-text">Chamado #0000001 - Banco de dados corrompido</p>
+                        <span class="notification-time">Há 5 minutos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status de Conexão -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="connectionStatus">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="wifiIcon">
+                        <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                        <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                        <line x1="12" y1="20" x2="12.01" y2="20"/>
+                    </svg>
+                </button>
+                <div class="offline-message" id="offlineMessage">
+                    Você está sem internet
+                </div>
+            </div>
+
+            <!-- Configurações -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="settingsBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v6m0 6v6m5.2-13.8l-4.2 4.2m-2 2l-4.2 4.2M23 12h-6m-6 0H1m17.8 5.2l-4.2-4.2m-2-2l-4.2-4.2"/>
+                    </svg>
+                </button>
+                <div class="dropdown-menu" id="settingsMenu">
+                    <button class="dropdown-item" onclick="changePassword()">Trocar de senha</button>
+                    <button class="dropdown-item" onclick="logout()">Sair</button>
+                </div>
+            </div>
+
+            <!-- Perfil -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="profileBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </button>
+                <div class="dropdown-menu dropdown-profile" id="profileMenu">
+                    <div class="profile-info">
+                        <p class="profile-name" id="userName">Nome do Usuário</p>
+                        <p class="profile-email" id="userEmail">usuario@email.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="company-logo">
+                <img src="" alt="Logo da Empresa" id="companyLogo">
+            </div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-item" onclick="window.location.href='fila-espera.html'">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M9 3v18"/>
+                    </svg>
+                    <span>Fila de espera</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area ticket-details-page">
+            <!-- Botões de Ação -->
+            <div class="ticket-actions">
+                <button class="btn-action btn-respond active" onclick="openRespondModal()">
+                    Responder
+                </button>
+                <button class="btn-action btn-edit" onclick="openEditModal()">
+                    Editar
+                </button>
+                <button class="btn-action btn-close" onclick="openCloseModal()" id="btnCloseTicket">
+                    Encerrar
+                </button>
+                <button class="btn-action btn-forward" onclick="openForwardModal()">
+                    Encaminhar
+                </button>
+            </div>
+
+            <!-- Detalhes do Chamado -->
+            <div class="ticket-details-container">
+                <div class="ticket-id">
+                    <span>ID: #<span id="ticketId">000342</span></span>
+                </div>
+
+                <div class="ticket-title">
+                    <h2 id="ticketTitle">Estou com problema em criar um sistema em 3 plataformas com banco na nuvem antes de dezembro chegar</h2>
+                </div>
+
+                <div class="ticket-description">
+                    <div class="description-text" id="ticketDescription">
+                        <!-- Descrição carregada dinamicamente -->
+                    </div>
+                    
+                    <!-- Imagens anexadas (se houver) -->
+                    <div class="ticket-attachments" id="ticketAttachments">
+                        <!-- Imagens serão carregadas aqui -->
+                    </div>
+                </div>
+
+                <div class="ticket-author">
+                    <span>att, <span id="ticketAuthor">miguel</span></span>
+                </div>
+
+                <!-- Respostas/Histórico -->
+                <div class="ticket-responses" id="ticketResponses">
+                    <!-- Respostas serão carregadas aqui -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal: Responder Chamado -->
+    <div class="modal-overlay" id="respondModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Responder Chamado</h3>
+                <button class="btn-close-modal" onclick="closeModal('respondModal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form" onsubmit="submitResponse(event)">
+                <div class="form-group">
+                    <label for="responseTitle" class="form-label">Título:</label>
+                    <input type="text" id="responseTitle" class="form-input" placeholder="Título da resposta" required>
+                </div>
+                <div class="form-group">
+                    <label for="responseDescription" class="form-label">Descrição:</label>
+                    <textarea id="responseDescription" class="form-textarea" rows="8" placeholder="Descreva sua resposta..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Anexar Imagens:</label>
+                    <input type="file" id="responseAttachments" class="form-file" accept="image/*" multiple>
+                    <div class="file-preview" id="responseFilePreview"></div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('respondModal')">Cancelar</button>
+                    <button type="submit" class="btn-submit">Enviar Resposta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Encerrar Chamado -->
+    <div class="modal-overlay" id="closeModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3>Encerrar Chamado</h3>
+                <button class="btn-close-modal" onclick="closeModal('closeModal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <form class="modal-form" onsubmit="submitCloseTicket(event)">
+                <div class="form-group">
+                    <label for="closeTitle" class="form-label">Título:</label>
+                    <input type="text" id="closeTitle" class="form-input" placeholder="Título do encerramento" required>
+                </div>
+                <div class="form-group">
+                    <label for="closeDescription" class="form-label">Descrição:</label>
+                    <textarea id="closeDescription" class="form-textarea" rows="8" placeholder="Descreva a resolução do problema..." required></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Anexar Imagens:</label>
+                    <input type="file" id="closeAttachments" class="form-file" accept="image/*" multiple>
+                    <div class="file-preview" id="closeFilePreview"></div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('closeModal')">Cancelar</button>
+                    <button type="submit" class="btn-submit btn-danger">Encerrar Chamado</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Encaminhar Chamado -->
+    <div class="modal-overlay" id="forwardModal">
+        <div class="modal-container modal-small">
+            <div class="modal-header">
+                <h3>Encaminhar Chamado</h3>
+                <button class="btn-close-modal" onclick="closeModal('forwardModal')">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Selecione o analista:</label>
+                    <div class="analysts-list" id="analystsList">
+                        <!-- Lista de analistas será carregada aqui -->
+                    </div>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('forwardModal')">Cancelar</button>
+                    <button type="button" class="btn-submit" onclick="confirmForward()">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="neodesk.js"></script>
+    <script src="chamado-detalhes.js"></script>
+</body>
+</html>

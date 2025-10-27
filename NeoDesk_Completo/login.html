@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoDesk - Login</title>
+    <link rel="stylesheet" href="styles-vertical.css">
+    <link rel="stylesheet" href="styles-horizontal.css" media="(min-width: 768px)">
+    <style>
+        /* Estilos específicos da página de login */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem;
+        }
+
+        .login-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 420px;
+            padding: 2.5rem;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .login-logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .login-form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .login-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .login-input::placeholder {
+            color: #9ca3af;
+        }
+
+        .forgot-password-link {
+            font-size: 0.875rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s;
+            align-self: flex-start;
+            margin-top: -0.5rem;
+        }
+
+        .forgot-password-link:hover {
+            color: #4f46e5;
+            text-decoration: underline;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 0.5rem;
+        }
+
+        .login-button:hover {
+            background-color: #4f46e5;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .error-message.show {
+            display: flex;
+        }
+
+        .error-message::before {
+            content: "⚠";
+            font-size: 1.25rem;
+        }
+
+        /* Modal de Esqueci Senha */
+        .forgot-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .forgot-modal.show {
+            display: flex;
+        }
+
+        .forgot-modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .forgot-modal-icon {
+            width: 64px;
+            height: 64px;
+            background-color: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .forgot-modal-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--info-color);
+        }
+
+        .forgot-modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .forgot-modal-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .forgot-modal-button {
+            width: 100%;
+            padding: 0.875rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .forgot-modal-button:hover {
+            background-color: #4f46e5;
+        }
+
+        @media (max-width: 640px) {
+            .login-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .login-logo {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Container de Login -->
+    <div class="login-container">
+        <div class="login-header">
+            <h1 class="login-logo">NeoDesk</h1>
+            <p class="login-subtitle">Faça login para acessar o sistema</p>
+        </div>
+
+        <!-- Mensagem de erro -->
+        <div class="error-message" id="errorMessage">
+            Credenciais inválidas. Tente novamente.
+        </div>
+
+        <!-- Formulário de Login -->
+        <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">
+            <div class="login-form-group">
+                <label for="email" class="login-label">E-mail</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    class="login-input" 
+                    placeholder="seu@email.com"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+
+            <div class="login-form-group">
+                <label for="password" class="login-label">Senha</label>
+                <input 
+                    type="password" 
+                    id="password" 
+                    name="password" 
+                    class="login-input" 
+                    placeholder="••••••••"
+                    required
+                    autocomplete="current-password"
+                >
+                <a class="forgot-password-link" onclick="showForgotPasswordModal()">
+                    Esqueci minha senha
+                </a>
+            </div>
+
+            <button type="submit" class="login-button">
+                Entrar
+            </button>
+        </form>
+    </div>
+
+    <!-- Modal Esqueci Senha -->
+    <div class="forgot-modal" id="forgotModal" onclick="closeForgotModal()">
+        <div class="forgot-modal-content" onclick="event.stopPropagation()">
+            <div class="forgot-modal-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <line x1="12" y1="16" x2="12" y2="12"/>
+                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                </svg>
+            </div>
+            <h2 class="forgot-modal-title">Esqueci minha senha</h2>
+            <p class="forgot-modal-text">
+                Para trocar a senha contate o administrador
+            </p>
+            <button class="forgot-modal-button" onclick="closeForgotModal()">
+                Entendi
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Função de login
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Esconder mensagem de erro anterior
+            errorMessage.classList.remove('show');
+            
+            try {
+                // Em produção, fazer chamada para API
+                // const response = await fetch('http://localhost:3000/api/auth/login', {
+                //     method: 'POST',
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({ email, password })
+                // });
+                
+                // Simulando login (REMOVER EM PRODUÇÃO)
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                // Login de demonstração - aceita qualquer email/senha
+                // Em produção, validar com a API
+                if (email && password) {
+                    // Salvar token ou sessão
+                    // localStorage.setItem('token', response.token);
+                    
+                    // Redirecionar para fila de espera
+                    window.location.href = 'fila-espera.html';
+                } else {
+                    showError();
+                }
+                
+            } catch (error) {
+                console.error('Erro no login:', error);
+                showError();
+            }
+        }
+        
+        function showError() {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.classList.add('show');
+            
+            // Remover erro após 5 segundos
+            setTimeout(() => {
+                errorMessage.classList.remove('show');
+            }, 5000);
+        }
+        
+        // Modal de esqueci senha
+        function showForgotPasswordModal() {
+            const modal = document.getElementById('forgotModal');
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeForgotModal() {
+            const modal = document.getElementById('forgotModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Fechar modal com ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeForgotModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,432 @@
+/* Estilos para Desktop/Horizontal (min-width: 768px) */
+
+@media (min-width: 768px) {
+    /* Header Desktop */
+    .main-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+    }
+
+    .header-left {
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .logo {
+        font-size: 1.75rem;
+    }
+
+    .main-nav {
+        overflow-x: visible;
+    }
+
+    .nav-btn {
+        font-size: 1rem;
+        padding: 0.625rem 1.25rem;
+    }
+
+    .header-right {
+        gap: 1rem;
+    }
+
+    /* Main Container Desktop */
+    .main-container {
+        flex-direction: row;
+    }
+
+    /* Sidebar Desktop */
+    .sidebar {
+        display: block;
+        width: 230px;
+        flex-shrink: 0;
+        height: calc(100vh - 73px);
+        position: sticky;
+        top: 73px;
+        overflow-y: auto;
+    }
+
+    .company-logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .sidebar-item {
+        font-size: 0.9375rem;
+        padding: 0.875rem 1rem;
+    }
+
+    /* Content Area Desktop */
+    .content-area {
+        padding: 2rem;
+        overflow-x: visible;
+    }
+
+    .content-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .content-header h2 {
+        font-size: 1.75rem;
+    }
+
+    .search-box {
+        width: 300px;
+    }
+
+    /* Tabela Desktop */
+    .table-container {
+        overflow-x: visible;
+    }
+
+    .tickets-table {
+        min-width: auto;
+    }
+
+    .tickets-table th {
+        padding: 1rem 1.25rem;
+        font-size: 0.8125rem;
+    }
+
+    .tickets-table td {
+        padding: 1.25rem;
+        font-size: 0.9375rem;
+    }
+
+    .status-badge {
+        padding: 0.375rem 1rem;
+        font-size: 0.8125rem;
+    }
+
+    .priority-badge {
+        font-size: 0.8125rem;
+    }
+
+    .user-tag {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.8125rem;
+    }
+
+    /* Dropdown Menus Desktop */
+    .dropdown-menu {
+        min-width: 280px;
+    }
+
+    .dropdown-profile {
+        min-width: 220px;
+    }
+
+    /* Dashboard Filters */
+    .dashboard-filters {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .date-filters {
+        flex-wrap: nowrap;
+        gap: 0.75rem;
+    }
+
+    .date-input-wrapper {
+        min-width: 160px;
+    }
+
+    .btn-search-dates {
+        min-width: 46px;
+        height: 46px;
+    }
+
+    .btn-download {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.9375rem;
+    }
+
+    /* Dashboard Cards */
+    .dashboard-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .dashboard-card {
+        padding: 2rem;
+    }
+
+    .card-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .card-value {
+        font-size: 2.5rem;
+    }
+
+    .card-label {
+        font-size: 0.9375rem;
+    }
+
+    /* Dashboard Charts */
+    .dashboard-charts {
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 2rem;
+    }
+
+    .chart-container {
+        padding: 2rem;
+    }
+
+    .chart-title {
+        font-size: 1.25rem;
+    }
+
+    .chart-placeholder {
+        min-height: 300px;
+    }
+
+    /* Formulário Desktop */
+    .ticket-form-container {
+        margin: 2rem auto;
+    }
+
+    .ticket-form-header {
+        padding: 2rem;
+    }
+
+    .ticket-form-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .ticket-form {
+        padding: 2rem 2.5rem;
+    }
+
+    .form-label {
+        font-size: 0.9375rem;
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+        padding: 0.875rem 1rem;
+        font-size: 0.9375rem;
+    }
+
+    .form-textarea {
+        min-height: 250px;
+    }
+
+    .btn-secondary,
+    .btn-submit {
+        padding: 0.875rem 2rem;
+        font-size: 0.9375rem;
+    }
+
+    /* Detalhes do Chamado Desktop */
+    .ticket-details-page {
+        padding: 2rem;
+    }
+
+    .ticket-actions {
+        gap: 1rem;
+        overflow-x: visible;
+    }
+
+    .btn-action {
+        padding: 0.875rem 1.75rem;
+        font-size: 0.9375rem;
+    }
+
+    .ticket-details-container {
+        padding: 2.5rem;
+    }
+
+    .ticket-title h2 {
+        font-size: 1.75rem;
+    }
+
+    .ticket-attachments {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .modal-container {
+        max-height: 85vh;
+    }
+
+    .modal-header {
+        padding: 2rem;
+    }
+
+    .modal-header h3 {
+        font-size: 1.5rem;
+    }
+
+    .modal-form,
+    .modal-body {
+        padding: 2rem;
+    }
+
+    .file-preview {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .file-preview-item img {
+        height: 120px;
+    }
+}
+
+@media (min-width: 1024px) {
+    /* Large Desktop */
+    .sidebar {
+        width: 260px;
+    }
+
+    .content-area {
+        padding: 2.5rem;
+    }
+
+    .tickets-table th {
+        padding: 1.25rem 1.5rem;
+    }
+
+    .tickets-table td {
+        padding: 1.5rem;
+    }
+
+    /* Dashboard Cards - 3 columns */
+    .dashboard-cards {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .ticket-form {
+        padding: 2.5rem 3rem;
+    }
+
+    .form-textarea {
+        min-height: 300px;
+    }
+
+    .ticket-details-container {
+        padding: 3rem;
+    }
+
+    .ticket-title h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (min-width: 1280px) {
+    /* Extra Large Desktop */
+    .main-header {
+        padding: 1rem 3rem;
+    }
+
+    .content-area {
+        padding: 3rem;
+    }
+
+    .sidebar {
+        width: 280px;
+    }
+
+    /* Dashboard Content */
+    .dashboard-content {
+        padding: 2.5rem;
+    }
+
+    /* Dashboard Cards - Better spacing */
+    .dashboard-cards {
+        gap: 2rem;
+    }
+
+    .dashboard-card {
+        padding: 2.25rem;
+    }
+
+    .card-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .card-value {
+        font-size: 3rem;
+    }
+
+    /* Charts */
+    .dashboard-charts {
+        gap: 2.5rem;
+    }
+
+    .chart-container {
+        padding: 2.5rem;
+    }
+
+    .chart-placeholder {
+        min-height: 350px;
+    }
+}
+
+/* Scrollbar Customization Desktop */
+@media (min-width: 768px) {
+    .sidebar::-webkit-scrollbar,
+    .table-container::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    .sidebar::-webkit-scrollbar-track,
+    .table-container::-webkit-scrollbar-track {
+        background: #f3f4f6;
+        border-radius: 4px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb,
+    .table-container::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 4px;
+    }
+
+    .sidebar::-webkit-scrollbar-thumb:hover,
+    .table-container::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+}
+
+/* Animations */
+@media (min-width: 768px) {
+    .dropdown-menu {
+        animation: fadeIn 0.2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .main-header,
+    .search-box {
+        display: none;
+    }
+
+    .content-area {
+        padding: 0;
+    }
+
+    .tickets-table {
+        font-size: 10pt;
+    }
+}

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoDesk - Fila de Espera</title>
+    <link rel="stylesheet" href="styles-vertical.css">
+    <link rel="stylesheet" href="styles-horizontal.css" media="(min-width: 768px)">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-left">
+            <h1 class="logo">NeoDesk</h1>
+            <nav class="main-nav">
+                <button class="nav-btn active" data-page="meus-chamados">Meus chamados</button>
+                <button class="nav-btn" data-page="dashboard" onclick="window.location.href='dashboard.html'">Dashboard</button>
+                <button class="nav-btn" data-page="agenda">Agenda</button>
+                <button class="nav-btn btn-primary" data-page="abrir-chamado" onclick="window.location.href='abrir-chamado.html'">Abrir Chamado</button>
+            </nav>
+        </div>
+        
+        <div class="header-right">
+            <!-- Notificações -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="notificationsBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notification-badge">2</span>
+                </button>
+                <div class="dropdown-menu" id="notificationsMenu">
+                    <div class="dropdown-header">Notificações</div>
+                    <div class="notification-item">
+                        <p><strong>Novo chamado atribuído</strong></p>
+                        <p class="notification-text">Chamado #0000001 - Banco de dados corrompido</p>
+                        <span class="notification-time">Há 5 minutos</span>
+                    </div>
+                    <div class="notification-item">
+                        <p><strong>Chamado atualizado</strong></p>
+                        <p class="notification-text">Chamado #0000002 - Empresa pegando fogo</p>
+                        <span class="notification-time">Há 1 hora</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status de Conexão -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="connectionStatus">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="wifiIcon">
+                        <path d="M5 12.55a11 11 0 0 1 14.08 0"/>
+                        <path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+                        <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/>
+                        <line x1="12" y1="20" x2="12.01" y2="20"/>
+                    </svg>
+                </button>
+                <div class="offline-message" id="offlineMessage">
+                    Você está sem internet
+                </div>
+            </div>
+
+            <!-- Configurações -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="settingsBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M12 1v6m0 6v6m5.2-13.8l-4.2 4.2m-2 2l-4.2 4.2M23 12h-6m-6 0H1m17.8 5.2l-4.2-4.2m-2-2l-4.2-4.2"/>
+                    </svg>
+                </button>
+                <div class="dropdown-menu" id="settingsMenu">
+                    <button class="dropdown-item" onclick="changePassword()">Trocar de senha</button>
+                    <button class="dropdown-item" onclick="logout()">Sair</button>
+                </div>
+            </div>
+
+            <!-- Perfil -->
+            <div class="header-icon-wrapper">
+                <button class="header-icon" id="profileBtn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                </button>
+                <div class="dropdown-menu dropdown-profile" id="profileMenu">
+                    <div class="profile-info">
+                        <p class="profile-name" id="userName">Nome do Usuário</p>
+                        <p class="profile-email" id="userEmail">usuario@email.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="company-logo">
+                <img src="" alt="Logo da Empresa" id="companyLogo">
+            </div>
+            <nav class="sidebar-nav">
+                <button class="sidebar-item active">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M9 3v18"/>
+                    </svg>
+                    <span>Fila de espera</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+                <button class="sidebar-item">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                    </svg>
+                    <span>Botão</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Content Area -->
+        <main class="content-area">
+            <div class="content-header">
+                <h2>Fila de espera</h2>
+                <div class="search-box">
+                    <input type="text" placeholder="Pesquisar" id="searchInput">
+                    <button class="search-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabela de Chamados -->
+            <div class="table-container">
+                <table class="tickets-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" id="selectAll"></th>
+                            <th>Tipo de chamado</th>
+                            <th>ID</th>
+                            <th>Resumo</th>
+                            <th>Solicitante</th>
+                            <th>Atribuição</th>
+                            <th>Status</th>
+                            <th>Criado em</th>
+                            <th>prazo</th>
+                            <th>Prioridade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticketsTableBody">
+                        <tr class="ticket-row" onclick="openTicket('0000001')">
+                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td>Tipo de chamado</td>
+                            <td>0000001</td>
+                            <td>Banco de dados corrompido</td>
+                            <td>Ator X</td>
+                            <td><span class="user-tag">@ Miguel</span></td>
+                            <td><span class="status-badge status-pendente">Pendente</span></td>
+                            <td>16/07/2025</td>
+                            <td>24h</td>
+                            <td><span class="priority-badge priority-alta">Alta</span></td>
+                        </tr>
+                        <tr class="ticket-row" onclick="openTicket('0000002')">
+                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td>Tipo de chamado</td>
+                            <td>0000002</td>
+                            <td>Empresa pegando fogo</td>
+                            <td>Ator Y</td>
+                            <td><span class="user-tag">@ Miguel</span></td>
+                            <td><span class="status-badge status-pendente">Pendente</span></td>
+                            <td>14/07/2025</td>
+                            <td>96h</td>
+                            <td><span class="priority-badge priority-media">Média</span></td>
+                        </tr>
+                        <tr class="ticket-row" onclick="openTicket('0000003')">
+                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td>Tipo de chamado</td>
+                            <td>0000003</td>
+                            <td>Roteador com problemas</td>
+                            <td>Ator Z</td>
+                            <td><span class="user-tag">@ Miguel</span></td>
+                            <td><span class="status-badge status-solucionado">Solucionado</span></td>
+                            <td>15/07/2025</td>
+                            <td>4h</td>
+                            <td><span class="priority-badge priority-media">Média</span></td>
+                        </tr>
+                        <tr class="ticket-row" onclick="openTicket('0000004')">
+                            <td><input type="checkbox" onclick="event.stopPropagation()"></td>
+                            <td>Tipo de chamado</td>
+                            <td>0000004</td>
+                            <td>Rede desconectada</td>
+                            <td>Ator W</td>
+                            <td><span class="user-tag">@ Miguel</span></td>
+                            <td><span class="status-badge status-andamento">Em andamento</span></td>
+                            <td>16/07/2025</td>
+                            <td>8h</td>
+                            <td><span class="priority-badge priority-baixa">Baixa</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <script src="neodesk.js"></script>
+    <script>
+        // Carregar chamados ao iniciar a página
+        if (typeof loadTickets === 'function') {
+            loadTickets();
+        }
+    </script>
+</body>
+</html>
