@@ -1,0 +1,14 @@
+## 💡 Sprint 3 — *13/09 – 02/10*
+**🎯 Objetivo Principal:** Base de conhecimento e notificações
+
+| User Story | Story Points | Status | Requisito |
+|-------------|---------------|---------|------------|
+| Notificações sobre status de chamados | 13 | ✅ Concluído | R03 |
+| Painel com métricas e gráficos | 20 | ✅ Concluído | R03 |
+
+---
+
+## Relatório:
+
+Foi feito um pequeno ícone na direita que notificará o status dos chamados, caso ele tenha sido encerrado ou ainda esteja em andamento.
+Foi feito a criação de uma tela para mostrar as métricas dos chamados, quantos foram criados, quantos estão em andamento e quantos foram fechados.
