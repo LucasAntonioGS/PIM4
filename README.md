@@ -36,25 +36,11 @@ O desafio consiste em desenvolver um sistema integrado para gestão de chamados 
 
 [Diagrama de Funcionamento do Sistema](https://github.com/LucasAntonioGS/NeoDesk/blob/main/Diagrama_De_Funcionamento_Do_Sistema%20Atualizado%202.2.asta) 📄
 
---
-## 📋 Backlog do Produto <a id="backlog"></a>
+---
 
-| 🏅 Rank | ⚙️ Prioridade | 🧠 User Story | 🎯 Story Points | 🏁 Sprint | 📋 Requisito | 🧩 Status |
-|:-------:|:--------------:|:--------------|:---------------:|:----------:|:-------------:|:-----------:|
-| 1 | 🔴 Alta | Login com autenticação segura | 8 | 1 | R09 | ✅ Concluído |
-| 2 | 🔴 Alta | Abrir chamado via assistente virtual | 13 | 2 | R01 | 🏗️ Em desenvolvimento |
-| 3 | 🔴 Alta | Visualizar e priorizar chamados automaticamente | 21 | 2 | R02 | 🏗️ Em desenvolvimento |
-| 4 | 🔴 Alta | IA tenta resolver antes do atendimento humano | 34 | 2 | R01 | 🏗️ Em desenvolvimento |
-| 5 | 🟠 Média | Painel com métricas e gráficos | 20 | 3 | R04 | ⏳ Aguardando início |
-| 6 | 🟠 Média | Notificações sobre status de chamados | 13 | 3 | R03 | ⏳ Aguardando início |
-| 7 | 🟢 Baixa | Exportar relatórios em PDF | 8 | 4 | R04 | ⏳ Aguardando início |
-| 8 | 🟢 Baixa | Auditoria de ações (LGPD) | 12 | 4 | R09 | ⏳ Aguardando início |
+## BackLog do Produto
 
-### 🧾 Legenda:
-✅ **Concluído**  
-🏗️ **Em desenvolvimento**  
-⏳ **Aguardando início**
-
+[BackLog](https://github.com/LucasAntonioGS/PIM4/blob/main/Backlog%20do%20produto)
 
 ---
 
@@ -82,10 +68,10 @@ O desafio consiste em desenvolver um sistema integrado para gestão de chamados 
 
 | 🏁 Sprint | 📆 Período | 🎯 Objetivo Principal |
 |:----------:|:-----------:|:---------------------|
-| Sprint 1 | 01/08 – 21/08 | Implementação do login e estrutura base |
-| Sprint 2 | 22/08 – 12/09 | Assistente virtual e módulo de tickets |
-| Sprint 3 | 13/09 – 02/10 | Base de conhecimento e notificações |
-| Sprint 4 | 03/10 – 23/10 | Dashboard e auditoria de logs |
+| Sprint 1 | 01/08 – 21/08 | [Implementação do login e estrutura base](https://github.com/LucasAntonioGS/PIM4/blob/main/Sprint%20Backlog/Sprint_1.md) |
+| Sprint 2 | 22/08 – 12/09 | [Assistente virtual e módulo de tickets](https://github.com/LucasAntonioGS/PIM4/blob/main/Sprint%20Backlog/Sprint_2.md) |
+| Sprint 3 | 13/09 – 02/10 | [Base de conhecimento e notificações](https://github.com/LucasAntonioGS/PIM4/blob/main/Sprint%20Backlog/Sprint_3.md) |
+| Sprint 4 | 03/10 – 23/10 | [Dashboard e auditoria de logs](https://github.com/LucasAntonioGS/PIM4/blob/main/Sprint%20Backlog/Sprint_4.md) |
 
 ---
 
