@@ -45,11 +45,10 @@ O desafio consiste em desenvolver um sistema integrado para gestão de chamados 
 | 2 | 🔴 Alta | Abrir chamado via assistente virtual | 13 | 2 | R01 | 🏗️ Em desenvolvimento |
 | 3 | 🔴 Alta | Visualizar e priorizar chamados automaticamente | 21 | 2 | R02 | 🏗️ Em desenvolvimento |
 | 4 | 🔴 Alta | IA tenta resolver antes do atendimento humano | 34 | 2 | R01 | 🏗️ Em desenvolvimento |
-| 5 | 🟠 Média | Painel com métricas e gráficos | 20 | 4 | R04 | ⏳ Aguardando início |
+| 5 | 🟠 Média | Painel com métricas e gráficos | 20 | 3 | R04 | ⏳ Aguardando início |
 | 6 | 🟠 Média | Notificações sobre status de chamados | 13 | 3 | R03 | ⏳ Aguardando início |
-| 7 | 🟠 Média | Consulta à base de conhecimento | 16 | 3 | R03 | ⏳ Aguardando início |
-| 8 | 🟢 Baixa | Exportar relatórios em PDF | 8 | 4 | R04 | ⏳ Aguardando início |
-| 9 | 🟢 Baixa | Auditoria de ações (LGPD) | 12 | 4 | R09 | ⏳ Aguardando início |
+| 7 | 🟢 Baixa | Exportar relatórios em PDF | 8 | 4 | R04 | ⏳ Aguardando início |
+| 8 | 🟢 Baixa | Auditoria de ações (LGPD) | 12 | 4 | R09 | ⏳ Aguardando início |
 
 ### 🧾 Legenda:
 ✅ **Concluído**  
