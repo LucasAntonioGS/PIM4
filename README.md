@@ -9,12 +9,12 @@
 
 <p align="center">
   | <a href ="#desafio"> Desafio</a>  |  
+  <a href ="#diagrama"> Diagrama do Produto</a>  |    
   <a href ="#backlog"> Backlog do Produto</a>  |
   <a href ="#dor">DoR</a>  |
   <a href ="#dod">DoD</a>  |
   <a href ="#sprint"> Cronograma de Sprints</a>  |
-  <a href ="#tecnologias">Tecnologias</a> |
-  <a href ="#manual">Manual de Instalação</a>  | 
+  <a href ="#tecnologias">Tecnologias</a> | 
   <a href ="#equipe"> Equipe</a> |
 </p>
 
@@ -32,13 +32,13 @@ O desafio consiste em desenvolver um sistema integrado para gestão de chamados 
 
 ---
 
-## Diagrama de Desenvolcimento do Projeto 📄
+## 📄 Diagrama de Desenvolcimento do Projeto <a id="diagrama"></a>
 
 [Diagrama de Funcionamento do Sistema](https://github.com/LucasAntonioGS/NeoDesk/blob/main/Diagrama_De_Funcionamento_Do_Sistema%20Atualizado%202.2.asta) 📄
 
 ---
 
-## BackLog do Produto
+## BackLog do Produto <a id="backlog"></a>
 
 [BackLog](https://github.com/LucasAntonioGS/PIM4/blob/main/Backlog%20do%20produto)
 
@@ -87,3 +87,12 @@ O desafio consiste em desenvolver um sistema integrado para gestão de chamados 
 </h4>
 
 ---
+## 👨‍💻 Equipe <a id="equipe"></a>
+
+| Nome                         | Github   |
+|------------------------------|----------|
+| Pedro Henrique Rodrigues de Souza | [GitHub](#) |
+| Luiz Miguel Lemes                 | [GitHub](#) |
+| Renan Nogueira                    | [GitHub](#) |
+| Lucas Antônio Goulart Souto       | [GitHub](#) |
+| LIvia Jacó                        | [GitHub](#) |
